@@ -16,7 +16,7 @@ ALXPlayerCharacter::ALXPlayerCharacter()
 	PrimaryActorTick.bCanEverTick = true;
 
 	bUseControllerRotationPitch = false;
-	bUseControllerRotationYaw = false;
+	bUseControllerRotationYaw = true;
 	bUseControllerRotationRoll = false;
 
 	UCapsuleComponent* CapsuleComp = GetCapsuleComponent();
@@ -84,16 +84,16 @@ void ALXPlayerCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
-	UCharacterMovementComponent* MoveComp = CastChecked<UCharacterMovementComponent>(GetCharacterMovement());
-	FVector CurrentAcceleration = MoveComp->GetCurrentAcceleration();
-	
-	FRotator CurrentAccelerationRotator = UKismetMathLibrary::MakeRotFromX(CurrentAcceleration);
-	FRotator ControlRotation = GetControlRotation();
-	FRotator DeltaRotation = UKismetMathLibrary::NormalizedDeltaRotator(CurrentAccelerationRotator, ControlRotation);
-
-	FRotator DeltaRotationYaw = FRotator(0.0f, ControlRotation.Yaw, 0.0f);
-	FRotator InterpolatedRotation = UKismetMathLibrary::RInterpTo(GetActorRotation(), DeltaRotationYaw, DeltaSeconds, 10.0f);
-	SetActorRotation(InterpolatedRotation);
+	// UCharacterMovementComponent* MoveComp = CastChecked<UCharacterMovementComponent>(GetCharacterMovement());
+	// FVector CurrentAcceleration = MoveComp->GetCurrentAcceleration();
+	//
+	// FRotator CurrentAccelerationRotator = UKismetMathLibrary::MakeRotFromX(CurrentAcceleration);
+	// FRotator ControlRotation = GetControlRotation();
+	// FRotator DeltaRotation = UKismetMathLibrary::NormalizedDeltaRotator(CurrentAccelerationRotator, ControlRotation);
+	//
+	// FRotator DeltaRotationYaw = FRotator(0.0f, ControlRotation.Yaw, 0.0f);
+	// FRotator InterpolatedRotation = UKismetMathLibrary::RInterpTo(GetActorRotation(), DeltaRotationYaw, DeltaSeconds, 10.0f);
+	// SetActorRotation(InterpolatedRotation);
 }
 
 void ALXPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
